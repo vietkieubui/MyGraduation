@@ -9,6 +9,7 @@ package Model;
  * @author BVKieu
  */
 public class StudentModel {
+
     public String id;
     public String name;
     public String gender;
@@ -16,6 +17,10 @@ public class StudentModel {
     public String classId;
     public String phonenumber;
     public String email;
+
+    public StudentModel() {
+
+    }
 
     public StudentModel(String id, String name, String gender, String birthday, String classId, String phonenumber, String email) {
         this.id = id;

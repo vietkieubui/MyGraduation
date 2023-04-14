@@ -99,6 +99,8 @@ public class AssignTopicForm extends javax.swing.JFrame {
 
         jLabel9.setText("Mã/Tên sinh viên");
 
+        studentInfo.setEditable(false);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
