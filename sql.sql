@@ -128,6 +128,16 @@ create table ProjectTopics(
 	createdAt VARCHAR(35) NOT NULL
 )
 
+create table Documents(
+	id varchar(12) primary key,
+	topic varchar(12) FOREIGN KEY REFERENCES ProjectTopics(id) NOT NULL,
+	path varchar(200) NOT NULL,
+	type varchar(1) NOT NULL,
+	createdAt varchar(35) NOT NULL
+)
+
+SELECT * FROM Documents WHERE Documents.topic = '001' and Documents.type = '1'
+SELECT * FROM Documents WHERE Documents.id ='2486909'
 Select * from ProjectTopics
 
 SELECT DISTINCT ProjectTopics.id, 
@@ -158,6 +168,8 @@ AND Students.id = ProjectTopics.student
 and SchoolYears.id = ProjectTopics.schoolYear
 and Users.id = ProjectTopics.createdBy
 ORDER BY ProjectTopics.id ASC
+
+
 
 SELECT * FROM ProjectTopics
 
@@ -247,6 +259,37 @@ SELECT Students.id, Students.name
 From Students
 LEFT JOIN ProjectTopics On ProjectTopics.student = Students.id
 WHERE ProjectTopics.student IS NULL
+
+--get ProjectTopicWithStudentModel
+SELECT ProjectTopics.id,
+ProjectTopics.name,
+ProjectTopics.description,
+ProjectTopics.require,
+Students.id as studentId,
+Students.name as studentName,
+TeachersInfor.id as teacherId,
+TeachersInfor.name as teacherName,
+TeachersInfor.academicRank as teacherAcademicRank,
+TeachersInfor.phonenumber as teacherPhoneNumber,
+TeachersInfor.majorsName as teacherMajors,
+TeachersInfor.email as teacherEmail,
+Courses.id as courseId,
+Courses.name as courseName,
+Majors.id as majorsId,
+Majors.name as majorsName,
+SchoolYears.id as schoolYearId,
+SchoolYears.name as schoolYearName
+FROM ProjectTopics, Courses, Majors, SchoolYears, Students, (
+SELECT Teachers.*, Teachers.majors as majorsId, majors.name as majorsName
+FROM Teachers, Majors
+WHERE Teachers.majors = Majors.id
+) as TeachersInfor
+WHERE ProjectTopics.id='001'
+and ProjectTopics.student = Students.id
+and ProjectTopics.teacher = TeachersInfor.id
+and ProjectTopics.course = Courses.id
+and ProjectTopics.schoolYear = SchoolYears.id
+and Courses.majors = Majors.id
 
 
 /**/
