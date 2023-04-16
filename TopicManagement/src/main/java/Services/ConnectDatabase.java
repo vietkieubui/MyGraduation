@@ -24,18 +24,20 @@ public class ConnectDatabase {
         return cnn;
     }
 
-    public void connectDatabase(String ipAddress, String username, String password) {
+    public boolean connectDatabase(String ipAddress, String username, String password) {
         try {
             String url = "jdbc:sqlserver://" + ipAddress + "\\SQLEXPRESS:1433;databaseName=GraduationProjectManagement;encrypt=true;trustServerCertificate=true;";
             String user = username;
             String pass = password;
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             cnn = DriverManager.getConnection(url, user, pass);
+            return true;
 //            JOptionPane.showMessageDialog(null, "Đã kết nối!");
         } catch (ClassNotFoundException | SQLException e) {
             JOptionPane.showMessageDialog(null, e.toString());
+            return false;
         }
-//        return cnn;
+        
     }
 
 }

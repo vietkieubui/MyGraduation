@@ -8,9 +8,11 @@ D:\NetbeansProject\MyGraduation\TopicManagement\src\main\java\View\Main\UpdateFo
 D:\NetbeansProject\MyGraduation\TopicManagement\src\main\java\Services\ConnectDatabase.java
 D:\NetbeansProject\MyGraduation\TopicManagement\src\main\java\Model\StudentModel.java
 D:\NetbeansProject\MyGraduation\TopicManagement\src\main\java\View\Main\AddForm\AddClassForm.java
+D:\NetbeansProject\MyGraduation\TopicManagement\src\main\java\Services\SolrServices.java
 D:\NetbeansProject\MyGraduation\TopicManagement\src\main\java\View\Main\UpdateForm\UpdateStudentForm.java
 D:\NetbeansProject\MyGraduation\TopicManagement\src\main\java\Model\CourseModel.java
 D:\NetbeansProject\MyGraduation\TopicManagement\src\main\java\Controller\Main\UpdateForm\UpdateProjectTopicController.java
+D:\NetbeansProject\MyGraduation\TopicManagement\src\main\java\Services\FileServices.java
 D:\NetbeansProject\MyGraduation\TopicManagement\src\main\java\Controller\AuthController.java
 D:\NetbeansProject\MyGraduation\TopicManagement\src\main\java\View\Main\UpdateForm\UpdateProjectTopicFormStep2.java
 D:\NetbeansProject\MyGraduation\TopicManagement\src\main\java\View\Main\AddForm\AddCourseForm.java
@@ -18,6 +20,7 @@ D:\NetbeansProject\MyGraduation\TopicManagement\src\main\java\Controller\Connect
 D:\NetbeansProject\MyGraduation\TopicManagement\src\main\java\Model\ClassModel.java
 D:\NetbeansProject\MyGraduation\TopicManagement\src\main\java\Controller\Main\UpdateForm\UpdateSchoolYearController.java
 D:\NetbeansProject\MyGraduation\TopicManagement\src\main\java\View\Main\TeacherManagementPanel.java
+D:\NetbeansProject\MyGraduation\TopicManagement\src\main\java\View\ConnectSolrView.java
 D:\NetbeansProject\MyGraduation\TopicManagement\src\main\java\View\Main\UpdateForm\UpdateSchoolYearForm.java
 D:\NetbeansProject\MyGraduation\TopicManagement\src\main\java\View\Main\AddForm\AddMajorsForm.java
 D:\NetbeansProject\MyGraduation\TopicManagement\src\main\java\View\Main\UpdateForm\UpdateProjectTopicFormStep3.java
@@ -25,14 +28,17 @@ D:\NetbeansProject\MyGraduation\TopicManagement\src\main\java\Controller\Main\Ad
 D:\NetbeansProject\MyGraduation\TopicManagement\src\main\java\Services\Services.java
 D:\NetbeansProject\MyGraduation\TopicManagement\src\main\java\Controller\Main\MainController.java
 D:\NetbeansProject\MyGraduation\TopicManagement\src\main\java\View\Auth\LoginPanel.java
+D:\NetbeansProject\MyGraduation\TopicManagement\src\main\java\Controller\ConnectSolrController.java
 D:\NetbeansProject\MyGraduation\TopicManagement\src\main\java\View\Main\AddForm\AddTeacherForm.java
 D:\NetbeansProject\MyGraduation\TopicManagement\src\main\java\View\Main\UpdateForm\UpdateProjectTopicForm.java
 D:\NetbeansProject\MyGraduation\TopicManagement\src\main\java\View\Main\AddForm\AddStudentForm.java
 D:\NetbeansProject\MyGraduation\TopicManagement\src\main\java\Services\MultiLineCellRenderer.java
+D:\NetbeansProject\MyGraduation\TopicManagement\src\main\java\Services\ConnectSolr.java
 D:\NetbeansProject\MyGraduation\TopicManagement\src\main\java\View\Main\StudentManagementPanel.java
 D:\NetbeansProject\MyGraduation\TopicManagement\src\main\java\View\Auth\RegisterPanel.java
 D:\NetbeansProject\MyGraduation\TopicManagement\src\main\java\View\Main\AddForm\AddProjectTopicFormStep2.java
 D:\NetbeansProject\MyGraduation\TopicManagement\src\main\java\Controller\Main\AddForm\AddStudentController.java
+D:\NetbeansProject\MyGraduation\TopicManagement\src\main\java\Controller\Main\UpdateForm\SubmitDocumentController.java
 D:\NetbeansProject\MyGraduation\TopicManagement\src\main\java\Model\Auth\User.java
 D:\NetbeansProject\MyGraduation\TopicManagement\src\main\java\View\Auth\AuthView.java
 D:\NetbeansProject\MyGraduation\TopicManagement\src\main\java\View\Main\ClassManagementPanel.java
@@ -52,6 +58,7 @@ D:\NetbeansProject\MyGraduation\TopicManagement\src\main\java\View\Main\CourseMa
 D:\NetbeansProject\MyGraduation\TopicManagement\src\main\java\Controller\Main\AddForm\AddSchoolYearController.java
 D:\NetbeansProject\MyGraduation\TopicManagement\src\main\java\Controller\Main\AddForm\AddMajorsController.java
 D:\NetbeansProject\MyGraduation\TopicManagement\src\main\java\View\Main\MajorsManagementPanel.java
+D:\NetbeansProject\MyGraduation\TopicManagement\src\main\java\View\Main\UpdateForm\SubmitDocumentForm.java
 D:\NetbeansProject\MyGraduation\TopicManagement\src\main\java\Model\ProjectTopicModel.java
 D:\NetbeansProject\MyGraduation\TopicManagement\src\main\java\Model\Auth\LoginModel.java
 D:\NetbeansProject\MyGraduation\TopicManagement\src\main\java\View\Main\AddForm\AddProjectTopicForm.java

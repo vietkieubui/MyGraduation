@@ -12,6 +12,7 @@ import Controller.Main.AddForm.AddSchoolYearController;
 import Controller.Main.AddForm.AddStudentController;
 import Controller.Main.AddForm.AddTeacherController;
 import Controller.Main.UpdateForm.AssignTopicController;
+import Controller.Main.UpdateForm.SubmitDocumentController;
 import Controller.Main.UpdateForm.UpdateClassController;
 import Controller.Main.UpdateForm.UpdateCourseController;
 import Controller.Main.UpdateForm.UpdateMajorsController;
@@ -225,6 +226,23 @@ public final class MainController {
                     System.out.println(ex.toString());
                     Services.showMess("Bạn phải chọn 1 hàng!");
                 }
+            }
+        });
+        
+        Services.addActionListener(projectManagementPanel.submitDocumentButton, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    int updateRow = projectManagementPanel.projectTopicTable.getSelectedRow();
+                    String id = (String) projectTopicTable.getValueAt(updateRow, 0);
+                    ProjectTopicModel projectTopicModel = Services.getProjectTopicWithStudentInfo(id);
+                    new SubmitDocumentController(projectTopicModel);
+
+                } catch (Exception ex) {
+                    System.out.println(ex.toString());
+                    Services.showMess("Bạn phải chọn 1 hàng!");
+                }
+                
             }
         });
     }

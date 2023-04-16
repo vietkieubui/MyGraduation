@@ -3,13 +3,16 @@ package Services;
 import Model.Auth.RegisterModel;
 import Model.Auth.User;
 import Model.CourseModel;
+import Model.DocumentModel;
 import Model.MajorsModel;
 import Model.ProjectTopicModel;
 import Model.SchoolYearModel;
+import Model.StudentModel;
 import Model.TeacherModel;
 import static Services.ConnectDatabase.cnn;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
+import java.io.File;
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import javax.swing.JButton;
@@ -808,4 +811,125 @@ public final class Services {
         }
         return projectTopic;
     }
+
+    public static ProjectTopicModel getProjectTopicWithStudentInfo(String projectTopicId) {
+        ProjectTopicModel projectTopic = new ProjectTopicModel();
+        String sql = "SELECT ProjectTopics.id,\n"
+                + "ProjectTopics.name,\n"
+                + "ProjectTopics.description,\n"
+                + "ProjectTopics.require,\n"
+                + "Students.id as studentId,\n"
+                + "Students.name as studentName,\n"
+                + "TeachersInfor.id as teacherId,\n"
+                + "TeachersInfor.name as teacherName,\n"
+                + "TeachersInfor.academicRank as teacherAcademicRank,\n"
+                + "TeachersInfor.phonenumber as teacherPhoneNumber,\n"
+                + "TeachersInfor.majorsName as teacherMajors,\n"
+                + "TeachersInfor.email as teacherEmail,\n"
+                + "Courses.id as courseId,\n"
+                + "Courses.name as courseName,\n"
+                + "Majors.id as majorsId,\n"
+                + "Majors.name as majorsName,\n"
+                + "SchoolYears.id as schoolYearId,\n"
+                + "SchoolYears.name as schoolYearName\n"
+                + "FROM ProjectTopics, Courses, Majors, SchoolYears, Students, (\n"
+                + "SELECT Teachers.*, Teachers.majors as majorsId, majors.name as majorsName\n"
+                + "FROM Teachers, Majors\n"
+                + "WHERE Teachers.majors = Majors.id\n"
+                + ") as TeachersInfor\n"
+                + "WHERE ProjectTopics.id=" + toSQLString(projectTopicId) + "\n"
+                + "and ProjectTopics.student = Students.id\n"
+                + "and ProjectTopics.teacher = TeachersInfor.id\n"
+                + "and ProjectTopics.course = Courses.id\n"
+                + "and ProjectTopics.schoolYear = SchoolYears.id\n"
+                + "and Courses.majors = Majors.id";
+        try {
+            Statement stm = cnn.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                StudentModel studentModel = new StudentModel();
+                studentModel.id = rs.getString("studentId");
+                studentModel.name = rs.getString("studentName");
+
+                TeacherModel teacherModel = new TeacherModel();
+                teacherModel.id = rs.getString("teacherId");
+                teacherModel.name = rs.getString("teacherName");
+                teacherModel.academicRank = rs.getString("teacherAcademicRank");
+                teacherModel.majors = rs.getString("teacherMajors");
+                teacherModel.phonenumber = rs.getString("teacherPhoneNumber");
+                teacherModel.email = rs.getString("teacherEmail");
+
+                CourseModel courseModel = new CourseModel();
+                courseModel.id = rs.getString("courseId");
+                courseModel.name = rs.getString("courseName");
+
+                MajorsModel majorsModel = new MajorsModel();
+                majorsModel.majorsId = rs.getString("majorsId");
+                majorsModel.name = rs.getString("majorsName");
+
+                SchoolYearModel schoolYearModel = new SchoolYearModel();
+                schoolYearModel.id = rs.getString("schoolYearId");
+                schoolYearModel.name = rs.getString("schoolYearName");
+
+                projectTopic.id = rs.getString("id");
+                projectTopic.name = rs.getString("name");
+                projectTopic.description = rs.getString("description");
+                projectTopic.require = rs.getString("require");
+                projectTopic.student = studentModel;
+                projectTopic.teacher = teacherModel;
+                projectTopic.course = courseModel;
+                projectTopic.majors = majorsModel;
+                projectTopic.schoolYear = schoolYearModel;
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(Services.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return projectTopic;
+    }
+
+    public static DocumentModel getDocumentModel(String topicId, String documentType) {
+        DocumentModel documentModel = new DocumentModel();
+        String sql = "SELECT * FROM Documents WHERE Documents.topic =" + toSQLString(topicId) + " and Documents.type =" + toSQLString(documentType);
+        try {
+            Statement stm = cnn.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                documentModel.id = rs.getString("id");
+                documentModel.topic = rs.getString("topic");
+                documentModel.path = rs.getString("path");
+                documentModel.type = rs.getString("type");
+                documentModel.createdAt = rs.getString("createdAt");
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(Services.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return documentModel;
+    }
+
+    public static boolean checkDocumentExist(String documentId) {
+        String sql = "SELECT * FROM Documents WHERE Documents.id =" + toSQLString(documentId);
+        try {
+            Statement stm = cnn.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                return true;
+            }
+            return false;
+        } catch (Exception ex) {
+            Logger.getLogger(Services.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+    }
+
+    public static boolean checkStringExistInArray(String word, String[] arrStrings) {
+        boolean found = false;
+        for (String str : arrStrings) {
+            if (str.equals(word)) {
+                found = true;
+                break;
+            }
+        }
+        return found;
+    }
+
 }

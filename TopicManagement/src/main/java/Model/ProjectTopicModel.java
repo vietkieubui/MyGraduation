@@ -16,6 +16,7 @@ public class ProjectTopicModel {
     public String require;
     public TeacherModel teacher;
     public CourseModel course;
+    public StudentModel student;
     public MajorsModel majors;
     public SchoolYearModel schoolYear;
     public String createdAt;

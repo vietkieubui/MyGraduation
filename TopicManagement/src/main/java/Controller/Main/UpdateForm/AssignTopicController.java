@@ -24,7 +24,6 @@ import javax.swing.table.DefaultTableModel;
 public class AssignTopicController {
 
     AssignTopicForm assignTopicForm = new AssignTopicForm();
-    ;
     DefaultTableModel projectTopicTable;
     String topicId;
     String topicName;

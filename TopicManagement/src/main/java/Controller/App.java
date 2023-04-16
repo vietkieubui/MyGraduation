@@ -10,7 +10,6 @@ import Services.Services;
 public class App {
 
     public static void main(String[] args) {
-        System.out.println("hello");
 //        new Auth_Controller();
           new ConnectDBController();
 //        var connectDB = new ConnectDatabase();
