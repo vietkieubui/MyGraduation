@@ -33,7 +33,7 @@ public class ProjectManagementPanel extends javax.swing.JPanel {
         updateButton = new javax.swing.JButton();
         deleteButton = new javax.swing.JButton();
         assignButton = new javax.swing.JButton();
-        submitDocumentButton = new javax.swing.JButton();
+        documentManagerButton = new javax.swing.JButton();
         statusComboBox = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
 
@@ -75,8 +75,8 @@ public class ProjectManagementPanel extends javax.swing.JPanel {
         assignButton.setText("Giao đồ án");
         jPanel1.add(assignButton);
 
-        submitDocumentButton.setText("Nộp tài liệu");
-        jPanel1.add(submitDocumentButton);
+        documentManagerButton.setText("Quản lí tài liệu");
+        jPanel1.add(documentManagerButton);
 
         statusComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chưa giao", "Đã giao", "Hoàn thành" }));
 
@@ -116,12 +116,12 @@ public class ProjectManagementPanel extends javax.swing.JPanel {
     public javax.swing.JButton addButton;
     public javax.swing.JButton assignButton;
     public javax.swing.JButton deleteButton;
+    public javax.swing.JButton documentManagerButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JTable projectTopicTable;
     public javax.swing.JComboBox<String> statusComboBox;
-    public javax.swing.JButton submitDocumentButton;
     public javax.swing.JButton updateButton;
     // End of variables declaration//GEN-END:variables
 }

@@ -136,6 +136,19 @@ create table Documents(
 	createdAt varchar(35) NOT NULL
 )
 
+Create table Similar(
+	document1 varchar(12) FOREIGN KEY REFERENCES Documents(id) NOT NULL,
+	document2 varchar(12) FOREIGN KEY REFERENCES Documents(id) NOT NULL,
+	similarPercent varchar(20) NOT NULL,
+)
+
+delete from Similar
+delete from Documents
+
+select * from Documents
+select * from Similar
+
+
 SELECT * FROM Documents WHERE Documents.topic = '001' and Documents.type = '1'
 SELECT * FROM Documents WHERE Documents.id ='2486909'
 Select * from ProjectTopics
@@ -290,6 +303,8 @@ and ProjectTopics.teacher = TeachersInfor.id
 and ProjectTopics.course = Courses.id
 and ProjectTopics.schoolYear = SchoolYears.id
 and Courses.majors = Majors.id
+
+
 
 
 /**/

@@ -58,6 +58,8 @@ public class AuthController {
                     System.out.println(User.name);
                     MainController mainController = new MainController();
                     authView.dispose();
+                }else{
+                    Services.showMess("Tài khoản hoặc mật khẩu không chính xác");
                 }
             }
         });

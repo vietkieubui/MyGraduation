@@ -229,7 +229,7 @@ public final class MainController {
             }
         });
         
-        Services.addActionListener(projectManagementPanel.submitDocumentButton, new ActionListener() {
+        Services.addActionListener(projectManagementPanel.documentManagerButton, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -565,18 +565,18 @@ public final class MainController {
     private void initValues() {
         if (projectManagementPanel.statusComboBox.getSelectedIndex() == 0) {
             projectManagementPanel.assignButton.setEnabled(true);
-            projectManagementPanel.submitDocumentButton.setEnabled(false);
+            projectManagementPanel.documentManagerButton.setEnabled(false);
         }
         Services.addActionListener(projectManagementPanel.statusComboBox, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (projectManagementPanel.statusComboBox.getSelectedIndex() == 0) {
                     projectManagementPanel.assignButton.setEnabled(true);
-                    projectManagementPanel.submitDocumentButton.setEnabled(false);
+                    projectManagementPanel.documentManagerButton.setEnabled(false);
                     Services.getNewProjectTopic(projectTopicTable);
                 } else {
                     projectManagementPanel.assignButton.setEnabled(false);
-                    projectManagementPanel.submitDocumentButton.setEnabled(true);
+                    projectManagementPanel.documentManagerButton.setEnabled(true);
                     if (projectManagementPanel.statusComboBox.getSelectedIndex() == 1) {
                         Services.getDoingProjectTopic(projectTopicTable);
                     }

@@ -78,7 +78,7 @@
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="fileNameLabel" alignment="0" max="32767" attributes="0"/>
+                  <Component id="fileNameLabel" alignment="0" pref="49" max="32767" attributes="0"/>
                   <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                       <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="chooseFileButton" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -86,7 +86,7 @@
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -100,7 +100,15 @@
       <SubComponents>
         <Component class="javax.swing.JButton" name="checkSimilarButton">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Ki&#x1ec3;m tra tr&#xf9;ng l&#x1eb7;p"/>
+            <Property name="text" type="java.lang.String" value="T&#xed;nh tr&#xf9;ng l&#x1eb7;p"/>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JButton" name="viewReport">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Xem b&#xe1;o c&#xe1;o tr&#xf9;ng l&#x1eb7;p"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
@@ -113,6 +121,11 @@
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
+        </Component>
+        <Component class="javax.swing.JButton" name="jButton1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="X&#xf3;a t&#xe0;i li&#x1ec7;u hi&#x1ec7;n t&#x1ea1;i"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="cancelButton">
           <Properties>

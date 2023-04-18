@@ -906,6 +906,59 @@ public final class Services {
         return documentModel;
     }
 
+    public static String[] getSummaryDocumentIdArray() {
+        String[] ids = null;
+        ArrayList<String> arrayList = new ArrayList<>();
+        String sql = "Select * from Documents WHERE type='0'";
+        try {
+            Statement stm = cnn.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                arrayList.add(rs.getString("id"));
+            }
+            ids = arrayList.toArray(new String[arrayList.size()]);
+        } catch (Exception ex) {
+            Logger.getLogger(Services.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return ids;
+    }
+    
+    public static String[] getFinalDocumentIdArray() {
+        String[] ids = null;
+        ArrayList<String> arrayList = new ArrayList<>();
+        String sql = "Select * from Documents WHERE type='0'";
+        try {
+            Statement stm = cnn.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                arrayList.add(rs.getString("id"));
+            }
+            ids = arrayList.toArray(new String[arrayList.size()]);
+        } catch (Exception ex) {
+            Logger.getLogger(Services.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return ids;
+    }
+
+    public static DocumentModel getDocumentModelById(String documentId) {
+        DocumentModel documentModel = new DocumentModel();
+        String sql = "SELECT * FROM Documents WHERE Documents.id =" + toSQLString(documentId);
+        try {
+            Statement stm = cnn.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                documentModel.id = rs.getString("id");
+                documentModel.topic = rs.getString("topic");
+                documentModel.path = rs.getString("path");
+                documentModel.type = rs.getString("type");
+                documentModel.createdAt = rs.getString("createdAt");
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(Services.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return documentModel;
+    }
+
     public static boolean checkDocumentExist(String documentId) {
         String sql = "SELECT * FROM Documents WHERE Documents.id =" + toSQLString(documentId);
         try {
@@ -930,6 +983,21 @@ public final class Services {
             }
         }
         return found;
+    }
+
+    public static boolean checkExistSimilarPercent(String documentId) {
+        String sql = "Select * from Similar WHERE document1=" + toSQLString(documentId) + "OR document2=" + toSQLString(documentId);
+        try {
+            Statement stm = cnn.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                return true;
+            }
+            return false;
+        } catch (Exception ex) {
+            Logger.getLogger(Services.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
     }
 
 }

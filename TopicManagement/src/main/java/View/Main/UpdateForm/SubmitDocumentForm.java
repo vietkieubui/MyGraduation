@@ -38,7 +38,9 @@ public class SubmitDocumentForm extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         checkSimilarButton = new javax.swing.JButton();
+        viewReport = new javax.swing.JButton();
         submitDocumentButton = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         documentId = new javax.swing.JTextField();
@@ -56,11 +58,17 @@ public class SubmitDocumentForm extends javax.swing.JFrame {
 
         jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 50, 5));
 
-        checkSimilarButton.setText("Kiểm tra trùng lặp");
+        checkSimilarButton.setText("Tính trùng lặp");
         jPanel1.add(checkSimilarButton);
+
+        viewReport.setText("Xem báo cáo trùng lặp");
+        jPanel1.add(viewReport);
 
         submitDocumentButton.setText("Nộp tài liệu");
         jPanel1.add(submitDocumentButton);
+
+        jButton1.setText("Xóa tài liệu hiện tại");
+        jPanel1.add(jButton1);
 
         cancelButton.setText("Hủy");
         jPanel1.add(cancelButton);
@@ -133,13 +141,13 @@ public class SubmitDocumentForm extends javax.swing.JFrame {
                     .addComponent(documentType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(fileNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(fileNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel10)
                         .addComponent(chooseFileButton)))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(60, 60, 60))
+                .addGap(18, 18, 18))
         );
 
         pack();
@@ -250,6 +258,7 @@ public class SubmitDocumentForm extends javax.swing.JFrame {
     public javax.swing.JTextField documentId;
     public javax.swing.JComboBox<String> documentType;
     public javax.swing.JLabel fileNameLabel;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel6;
@@ -259,5 +268,6 @@ public class SubmitDocumentForm extends javax.swing.JFrame {
     public javax.swing.JTextField studentInfo;
     public javax.swing.JButton submitDocumentButton;
     public javax.swing.JTextField topicInfor;
+    public javax.swing.JButton viewReport;
     // End of variables declaration//GEN-END:variables
 }

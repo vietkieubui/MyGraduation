@@ -17,17 +17,15 @@ import java.util.Set;
  * @author BVKieu
  */
 public final class CheckSimilarServices {
-
     public static double calculateSimilar(String[] text1, String[] text2) {
         double result = 0;
 
         // Detect similarity using Winnowing algorithm
-        for (int i = 0; i <= 14; i++) {
+        for (int i = 0; i <= 10; i++) {
             double similarity = detectSimilarity(text1, text2, i);
             result += similarity;
         }
-        result /= 15;
-
+        result /= 11;
         return result;
     }
 

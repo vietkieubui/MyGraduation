@@ -4,6 +4,7 @@
  */
 package Controller.Main.UpdateForm;
 
+import Controller.Main.CalculateSimilarController;
 import Model.DocumentModel;
 import Model.ProjectTopicModel;
 import Services.CheckSimilarServices;
@@ -171,59 +172,51 @@ public class SubmitDocumentController {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String text = null;
+                if (!Services.checkDocumentExist(submitDocumentForm.documentId.getText())) {
+                    Services.showMess("Tài liệu chưa được nộp. Vui lòng nộp tài liệu trước khi thực hiện chức năng này.");
+                    return;
+                }
                 String[] textStrings = null;
                 String[] ids = null;
-
+                String currentDocumentId = submitDocumentForm.documentId.getText();
+                System.out.println("1");
+                SolrQuery solrQuery = new SolrQuery();
+                solrQuery.set(CommonParams.Q, "id:" + currentDocumentId);
+                
+                QueryResponse response = null;
                 try {
-                    text = FileServices.fileToTextWithoutSpecialCharacter(file);
-                } catch (IOException | TikaException ex) {
-                    Logger.getLogger(SubmitDocumentController.class.getName()).log(Level.SEVERE, null, ex);
-                    Services.showMess("Bạn chưa chọn file");
-                    return;
+                    response = solrClient.query(solrQuery);
+                    SolrDocumentList results = response.getResults();
+                for (SolrDocument doc : results) {
+                    ArrayList<String> contentArray = (ArrayList<String>) doc.getFieldValue("content");
+                    textStrings = contentArray.toArray(new String[contentArray.size()]);                    
                 }
-                try {
-                    textStrings = VietnameseAnalyzerServices.textToStrings(text);
-                } catch (IOException ex) {
-                    Logger.getLogger(SubmitDocumentController.class.getName()).log(Level.SEVERE, null, ex);
-                    Services.showMess("Có lỗi xảy ra");
-                    return;
-                }
-
-                try {
-                    int documentType = submitDocumentForm.documentType.getSelectedIndex();
-                    if(documentType == 0){
-                        ids = SolrServices.getAllSummaryDocumentId();
-                    }else if(documentType == 1){
-                        ids = SolrServices.getAllFinalDocumentId();
-                    }
-                    
                 } catch (SolrServerException | IOException ex) {
                     Logger.getLogger(SubmitDocumentController.class.getName()).log(Level.SEVERE, null, ex);
-                    Services.showMess("Có lỗi xảy ra");
-                    return;
                 }
+                System.out.println("2");
+                
 
-                SolrQuery solrQuery = new SolrQuery();
-                for (String id : ids) {
-                    solrQuery.set(CommonParams.Q, "id:" + id);
-                    // Thực hiện truy vấn
-                    QueryResponse response;
-                    try {
-                        response = solrClient.query(solrQuery);
-                        SolrDocumentList results = response.getResults();
-                        for (SolrDocument doc : results) {
-                            ArrayList<String> contentArray = (ArrayList<String>) doc.getFieldValue("content");
-                            String[] contentStrings = contentArray.toArray(new String[contentArray.size()]);
-                            CheckSimilarServices.calculateSimilar(textStrings, contentStrings);
-                        }
-                    } catch (SolrServerException | IOException ex) {
-                        Logger.getLogger(SubmitDocumentController.class.getName()).log(Level.SEVERE, null, ex);
-                        Services.showMess("Có lỗi xảy ra");
-                        return;
-                    }
-
+                int documentType = submitDocumentForm.documentType.getSelectedIndex();
+                if (documentType == 0) {
+                    ids = Services.getSummaryDocumentIdArray();
+                } else if (documentType == 1) {
+                    ids = Services.getFinalDocumentIdArray();
                 }
+                System.out.println("3");
 
+                new CalculateSimilarController(currentDocumentId, textStrings, ids);
+            }
+        });
+
+        Services.addActionListener(submitDocumentForm.viewReport, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (Services.checkExistSimilarPercent(documentModel.id)) {
+
+                } else {
+                    Services.showMess("Không có báo cáo về tại liệu này, vui lòng bấm Tính trùng lặp rồi lưu lại");
+                }
             }
         });
 
