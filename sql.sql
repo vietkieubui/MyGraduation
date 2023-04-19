@@ -147,7 +147,17 @@ delete from Documents
 
 select * from Documents
 select * from Similar
+SELECT * FROM Similar
+WHERE (Similar.document1 = '170147'
+AND Similar.document2 = '974790')
+OR (Similar.document1 = '974790'
+AND Similar.document2 = '170147')
 
+SELECT * FROM Similar
+WHERE (Similar.document1 = '974790'
+AND Similar.document2 = '344016')
+OR (Similar.document1 = '344016'
+AND Similar.document2 = '974790')
 
 SELECT * FROM Documents WHERE Documents.topic = '001' and Documents.type = '1'
 SELECT * FROM Documents WHERE Documents.id ='2486909'

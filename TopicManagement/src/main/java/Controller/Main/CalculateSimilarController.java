@@ -61,9 +61,10 @@ public class CalculateSimilarController {
                         Services.toSQLString(data.document2),
                         Services.toSQLString(String.valueOf(data.similarPercent))
                     };
-                    if (!Services.insertIntoDatabase("Similar", columnsName, values)) {
-                        Services.showMess("Có lỗi xảy ra");
-                    }
+//                    if (!Services.insertIntoDatabase("Similar", columnsName, values)) {
+//                        Services.showMess("Có lỗi xảy ra");
+//                    }
+                    Services.saveSimilarData(data.document1, data.document2, data.similarPercent);
                 }
                 Services.showMess("Xong");
             }

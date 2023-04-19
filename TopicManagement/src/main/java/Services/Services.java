@@ -922,7 +922,7 @@ public final class Services {
         }
         return ids;
     }
-    
+
     public static String[] getFinalDocumentIdArray() {
         String[] ids = null;
         ArrayList<String> arrayList = new ArrayList<>();
@@ -998,6 +998,40 @@ public final class Services {
             Logger.getLogger(Services.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
+    }
+
+    public static boolean checkExistSimilarPercentBetweenTwoDocuments(String document1, String document2) {
+        String sql = "SELECT * FROM Similar\n"
+                + "WHERE (Similar.document1 = " + toSQLString(document1) + "\n"
+                + "AND Similar.document2 = " + toSQLString(document2) + ")\n"
+                + "OR (Similar.document1 = " + toSQLString(document2) + "\n"
+                + "AND Similar.document2 = " + toSQLString(document1) + ")";
+        try {
+            Statement stm = cnn.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                return true;
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(Services.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+        return false;
+    }
+
+    public static boolean saveSimilarData(String document1, String document2, double similarPercent) {
+        if (checkExistSimilarPercentBetweenTwoDocuments(document1, document2)) {
+            String[] columnsName = {"similarPercent"};
+            String[] values = {
+                toSQLString(String.valueOf(similarPercent))
+            };
+            String condition = "(Similar.document1 = " + toSQLString(document1) + "\n"
+                    + "AND Similar.document2 = " + toSQLString(document2) + ")\n"
+                    + "OR (Similar.document1 = " + toSQLString(document2) + "\n"
+                    + "AND Similar.document2 = " + toSQLString(document1) + ")";
+            updateData("Similar", columnsName, values, condition);
+        }
+        return false;
     }
 
 }

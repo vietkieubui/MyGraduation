@@ -213,7 +213,7 @@ public class SubmitDocumentController {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (Services.checkExistSimilarPercent(documentModel.id)) {
-
+                    
                 } else {
                     Services.showMess("Không có báo cáo về tại liệu này, vui lòng bấm Tính trùng lặp rồi lưu lại");
                 }
