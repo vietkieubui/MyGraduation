@@ -4,6 +4,7 @@
  */
 package Controller.Main.UpdateForm;
 
+import Controller.Main.ReportSimilarController;
 import Controller.Main.CalculateSimilarController;
 import Model.DocumentModel;
 import Model.ProjectTopicModel;
@@ -70,16 +71,6 @@ public class SubmitDocumentController {
                 } catch (TikaException ex) {
                     Logger.getLogger(SubmitDocumentController.class.getName()).log(Level.SEVERE, null, ex);
                 }
-//                String[] strings;
-//                try {
-//                    strings = VietnameseAnalyzerServices.textToStrings(text);
-//                    for (String st : strings) {
-//                        System.out.println(st);
-//                    }
-//                } catch (IOException ex) {
-//                    Logger.getLogger(SubmitDocumentController.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-
             }
         });
 
@@ -144,7 +135,6 @@ public class SubmitDocumentController {
 
                     } else {
                         String[] columnsName = {"id", "topic", "path", "type", "createdAt"};
-
                         String[] values = {
                             Services.toSQLString(documentId),
                             Services.toSQLString(projectTopicModel.id),
@@ -159,12 +149,10 @@ public class SubmitDocumentController {
                             Services.showMess("Có lỗi xảy ra");
                         }
                     }
-
                 } catch (IOException | SolrServerException ex) {
                     Logger.getLogger(SubmitDocumentController.class.getName()).log(Level.SEVERE, null, ex);
                     Services.showMess("Có lỗi xảy ra");
                 }
-
             }
         });
 
@@ -179,23 +167,20 @@ public class SubmitDocumentController {
                 String[] textStrings = null;
                 String[] ids = null;
                 String currentDocumentId = submitDocumentForm.documentId.getText();
-                System.out.println("1");
                 SolrQuery solrQuery = new SolrQuery();
                 solrQuery.set(CommonParams.Q, "id:" + currentDocumentId);
-                
+
                 QueryResponse response = null;
                 try {
                     response = solrClient.query(solrQuery);
                     SolrDocumentList results = response.getResults();
-                for (SolrDocument doc : results) {
-                    ArrayList<String> contentArray = (ArrayList<String>) doc.getFieldValue("content");
-                    textStrings = contentArray.toArray(new String[contentArray.size()]);                    
-                }
+                    for (SolrDocument doc : results) {
+                        ArrayList<String> contentArray = (ArrayList<String>) doc.getFieldValue("content");
+                        textStrings = contentArray.toArray(new String[contentArray.size()]);
+                    }
                 } catch (SolrServerException | IOException ex) {
                     Logger.getLogger(SubmitDocumentController.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                System.out.println("2");
-                
 
                 int documentType = submitDocumentForm.documentType.getSelectedIndex();
                 if (documentType == 0) {
@@ -203,7 +188,6 @@ public class SubmitDocumentController {
                 } else if (documentType == 1) {
                     ids = Services.getFinalDocumentIdArray();
                 }
-                System.out.println("3");
 
                 new CalculateSimilarController(currentDocumentId, textStrings, ids);
             }
@@ -213,7 +197,7 @@ public class SubmitDocumentController {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (Services.checkExistSimilarPercent(documentModel.id)) {
-                    
+                    new ReportSimilarController(documentModel.id);
                 } else {
                     Services.showMess("Không có báo cáo về tại liệu này, vui lòng bấm Tính trùng lặp rồi lưu lại");
                 }

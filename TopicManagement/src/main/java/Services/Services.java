@@ -683,6 +683,39 @@ public final class Services {
         }
     }
 
+    public static void getReportSimilar(DefaultTableModel reportTable, String documentId) {
+        reportTable.setRowCount(0);
+        String sql = "SELECT Similar.document1, Similar.document2, ProjectTopics.id as topic, Documents.paths, Documents.type, Similar.similarPercent \n"
+                + "FROM Similar, Documents, ProjectTopics\n"
+                + "WHERE Similar.document1 = " + toSQLString(documentId) + " and Similar.document2 = Documents.id and Documents.topic = ProjectTopics.id";
+        String sql1 = "SELECT Similar.document1, Similar.document2, ProjectTopics.id as topic, Documents.paths, Documents.type, Similar.similarPercent \n"
+                + "FROM Similar, Documents, ProjectTopics\n"
+                + "WHERE Similar.document2 = "+toSQLString(documentId)+" and Similar.document1 = Documents.id and Documents.topic = ProjectTopics.id";
+        try {
+            Statement stm = cnn.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                reportTable.addRow(new Object[]{
+                    rs.getString("document2"),
+                    rs.getString("topic"),
+                    rs.getString("type"),
+                    rs.getString("paths"),
+                    rs.getString("similarPercent"),});
+            }
+            ResultSet rs1 = stm.executeQuery(sql1);
+            while (rs1.next()) {
+                reportTable.addRow(new Object[]{
+                    rs1.getString("document1"),
+                    rs1.getString("topic"),
+                    rs1.getString("type"),
+                    rs1.getString("paths"),
+                    rs1.getString("similarPercent"),});
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(Services.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     /**
      *
      * validate form
@@ -896,7 +929,7 @@ public final class Services {
             while (rs.next()) {
                 documentModel.id = rs.getString("id");
                 documentModel.topic = rs.getString("topic");
-                documentModel.path = rs.getString("path");
+                documentModel.path = rs.getString("paths");
                 documentModel.type = rs.getString("type");
                 documentModel.createdAt = rs.getString("createdAt");
             }
@@ -949,7 +982,7 @@ public final class Services {
             while (rs.next()) {
                 documentModel.id = rs.getString("id");
                 documentModel.topic = rs.getString("topic");
-                documentModel.path = rs.getString("path");
+                documentModel.path = rs.getString("paths");
                 documentModel.type = rs.getString("type");
                 documentModel.createdAt = rs.getString("createdAt");
             }

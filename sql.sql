@@ -131,7 +131,7 @@ create table ProjectTopics(
 create table Documents(
 	id varchar(12) primary key,
 	topic varchar(12) FOREIGN KEY REFERENCES ProjectTopics(id) NOT NULL,
-	path varchar(200) NOT NULL,
+	paths varchar(200) NOT NULL,
 	type varchar(1) NOT NULL,
 	createdAt varchar(35) NOT NULL
 )
@@ -313,6 +313,22 @@ and ProjectTopics.teacher = TeachersInfor.id
 and ProjectTopics.course = Courses.id
 and ProjectTopics.schoolYear = SchoolYears.id
 and Courses.majors = Majors.id
+
+--get report similar
+
+select *  from Similar
+
+SELECT Similar.document1, Similar.document2, ProjectTopics.id as topic, Documents.paths, Documents.type, Similar.similarPercent 
+FROM Similar, Documents, ProjectTopics
+WHERE Similar.document1 = '170147' and Similar.document2 = Documents.id and Documents.topic = ProjectTopics.id
+
+SELECT Similar.document1, Similar.document2, ProjectTopics.id as topic, Documents.paths, Documents.type 
+FROM Similar, Documents, ProjectTopics
+WHERE Similar.document2 = '170147' and Similar.document1 = Documents.id and Documents.topic = ProjectTopics.id
+
+Select * from Documents
+
+
 
 
 
