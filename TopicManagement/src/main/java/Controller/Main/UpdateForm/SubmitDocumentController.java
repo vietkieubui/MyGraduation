@@ -119,7 +119,7 @@ public class SubmitDocumentController {
                     }
                     SolrServices.indexToSolr(document);
                     if (Services.checkDocumentExist(documentModel.id)) {
-                        String[] columnsName = {"topic", "path", "type", "createdAt"};
+                        String[] columnsName = {"topic", "paths", "type", "createdAt"};
                         String[] values = {
                             Services.toSQLString(projectTopicModel.id),
                             Services.toSQLString(path),
@@ -134,7 +134,7 @@ public class SubmitDocumentController {
                         }
 
                     } else {
-                        String[] columnsName = {"id", "topic", "path", "type", "createdAt"};
+                        String[] columnsName = {"id", "topic", "paths", "type", "createdAt"};
                         String[] values = {
                             Services.toSQLString(documentId),
                             Services.toSQLString(projectTopicModel.id),
@@ -200,6 +200,23 @@ public class SubmitDocumentController {
                     new ReportSimilarController(documentModel.id);
                 } else {
                     Services.showMess("Không có báo cáo về tại liệu này, vui lòng bấm Tính trùng lặp rồi lưu lại");
+                }
+            }
+        });
+        
+        Services.addActionListener(submitDocumentForm.deleteCurrentDocument, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String documentId = submitDocumentForm.documentId.getText();
+                try {
+                    SolrServices.deleteDocument(documentId);
+                    Services.deleteDocumentAndSimilar(documentId);
+                    initValues();
+                    Services.showMess("Xóa thành công");
+                } catch (SolrServerException | IOException ex) {
+                    Logger.getLogger(SubmitDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+                    Services.showMess("Có lỗi xảy ra!");
+                    return;
                 }
             }
         });

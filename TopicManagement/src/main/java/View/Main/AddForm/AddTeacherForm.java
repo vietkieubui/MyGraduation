@@ -50,6 +50,7 @@ public class AddTeacherForm extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Thêm giảng viên");
 
         jLabel3.setText("Khoa");
 

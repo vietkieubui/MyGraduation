@@ -48,6 +48,7 @@ public class AddClassForm extends javax.swing.JFrame {
         cancelButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Thêm lớp");
 
         jLabel2.setText("Tên lớp");
 

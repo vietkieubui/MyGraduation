@@ -11,6 +11,8 @@ import Model.ProjectTopicModel;
 import Model.SchoolYearModel;
 import Model.TeacherModel;
 import Services.Services;
+import Services.SolrServices;
+import Services.VietnameseAnalyzerServices;
 import View.Main.AddForm.AddProjectTopicForm;
 import View.Main.AddForm.AddProjectTopicFormStep1;
 import View.Main.AddForm.AddProjectTopicFormStep2;
@@ -18,12 +20,17 @@ import View.Main.AddForm.AddProjectTopicFormStep3;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JPanel;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+import org.apache.solr.client.solrj.SolrServerException;
+import org.apache.solr.common.SolrInputDocument;
 
 /**
  *
@@ -217,7 +224,6 @@ public class AddProjectTopicController {
     }
 
     private void step3ButtonActionListener() {
-
         Services.addActionListener(step3.backButton, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -232,6 +238,26 @@ public class AddProjectTopicController {
         Services.addActionListener(step3.finishButton, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                SolrInputDocument document = new SolrInputDocument();
+                String createdAt = Services.getCurrentTime();
+                document.addField("type", "2");
+                document.addField("id", projectTopicModel.id);
+                document.addField("createdAt", createdAt);
+
+                String[] contents;
+                try {
+                    contents = VietnameseAnalyzerServices.textToStrings(projectTopicModel.name);
+                    for (String content : contents) {
+                        document.addField("content", content);
+                    }
+                    SolrServices.indexToSolr(document);
+                } catch (IOException | SolrServerException ex) {
+                    Logger.getLogger(AddProjectTopicController.class.getName()).log(Level.SEVERE, null, ex);
+                    Services.showMess("Có lỗi xảy ra");
+                    return;
+                }
+
+                //insert into SQL server
                 String[] columnsName = {
                     "id",
                     "name",
@@ -261,8 +287,16 @@ public class AddProjectTopicController {
                     Services.showMess("Thêm thành công");
                     addProjectTopicForm.dispose();
                     Services.getNewProjectTopic(table);
+                } else {
+                    Services.showMess("Có lỗi xảy ra");
                 }
 
+            }
+        });
+        
+        Services.addActionListener(step3.checkSimilar, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
             }
         });
     }

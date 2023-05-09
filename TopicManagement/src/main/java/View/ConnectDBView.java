@@ -20,6 +20,16 @@ public class ConnectDBView extends javax.swing.JFrame {
      * Creates new form Login_View1
      */
     public ConnectDBView() {
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
+            System.out.println("error when set nimbus" + ex);
+        }
         initComponents();
         Position position = new Position(this);
         setLocation(position.getX(), position.getY());
@@ -49,6 +59,7 @@ public class ConnectDBView extends javax.swing.JFrame {
         passwordText = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Kết nối SQL Server");
 
         connectButton.setText("Kết nối");
 

@@ -690,7 +690,7 @@ public final class Services {
                 + "WHERE Similar.document1 = " + toSQLString(documentId) + " and Similar.document2 = Documents.id and Documents.topic = ProjectTopics.id";
         String sql1 = "SELECT Similar.document1, Similar.document2, ProjectTopics.id as topic, Documents.paths, Documents.type, Similar.similarPercent \n"
                 + "FROM Similar, Documents, ProjectTopics\n"
-                + "WHERE Similar.document2 = "+toSQLString(documentId)+" and Similar.document1 = Documents.id and Documents.topic = ProjectTopics.id";
+                + "WHERE Similar.document2 = " + toSQLString(documentId) + " and Similar.document1 = Documents.id and Documents.topic = ProjectTopics.id";
         try {
             Statement stm = cnn.createStatement();
             ResultSet rs = stm.executeQuery(sql);
@@ -1065,6 +1065,22 @@ public final class Services {
             updateData("Similar", columnsName, values, condition);
         }
         return false;
+    }
+
+    public static boolean deleteDocumentAndSimilar(String documentId) {
+        String deleteSimilarSQL = "DELETE FROM Similar WHERE Similar.document1 = " + toSQLString(documentId) + " OR Similar.document2 =" + toSQLString(documentId);
+        String deleteDocumentSQL = "DELETE FROM Documents WHERE Documents.id = " + toSQLString(documentId);
+        System.out.println(deleteSimilarSQL + "\n" + deleteDocumentSQL);
+        try {
+            Statement stm = cnn.createStatement();
+            stm.executeUpdate(deleteSimilarSQL);
+            stm.executeUpdate(deleteDocumentSQL);
+            return true;
+        } catch (Exception ex) {
+            Logger.getLogger(Services.class.getName()).log(Level.SEVERE, null, ex);
+            showMess(ex.toString());
+            return false;
+        }
     }
 
 }

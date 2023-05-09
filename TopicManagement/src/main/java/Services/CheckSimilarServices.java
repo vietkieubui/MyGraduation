@@ -21,11 +21,12 @@ public final class CheckSimilarServices {
         double result = 0;
 
         // Detect similarity using Winnowing algorithm
-        for (int i = 0; i <= 10; i++) {
+        for (int i = 1; i <= 3; i++) {
             double similarity = detectSimilarity(text1, text2, i);
+            System.out.println("Result in k= " + i + ":" + similarity);
             result += similarity;
         }
-        result /= 11;
+        result /= 3;
         return result;
     }
 
@@ -49,12 +50,11 @@ public final class CheckSimilarServices {
             String subTextString = String.join(" ", subTextArray);
             kGrams.add(subTextString);
         }
-
         return kGrams;
     }
 
     public static Set<String> calculateFingerprints(List<String> kGrams) {
-        Map<String, Integer> kGramHashes = new HashMap<>();
+        Map<Integer, Integer> kGramHashes = new HashMap<>();
         Set<String> fingerprints = new HashSet<>();
 
         for (int i = 0; i < kGrams.size(); i++) {
@@ -62,7 +62,7 @@ public final class CheckSimilarServices {
             int kGramHash = kGram.hashCode();
 
             if (!kGramHashes.containsKey(kGram)) {
-                kGramHashes.put(kGram, kGramHash);
+                kGramHashes.put(i, kGramHash);
             }
         }
 
@@ -79,8 +79,8 @@ public final class CheckSimilarServices {
         return fingerprints;
     }
 
-    public static boolean isMinima(int kGramHash, Map<String, Integer> kGramHashes, int index) {
-        for (int i = index - 5; i <= index + 5; i++) {
+    public static boolean isMinima(int kGramHash, Map<Integer, Integer> kGramHashes, int index) {
+        for (int i = index - 3; i <= index + 3; i++) {
             if (i >= 0 && i < kGramHashes.size() && kGramHashes.get(kGramHashes.keySet().toArray()[i]) < kGramHash) {
                 return false;
             }

@@ -51,6 +51,7 @@ public class UpdateCourseForm extends javax.swing.JFrame {
         idText = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Cập nhật khóa");
 
         jLabel3.setText("Khoa");
 

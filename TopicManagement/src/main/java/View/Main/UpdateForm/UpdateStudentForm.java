@@ -59,6 +59,7 @@ public class UpdateStudentForm extends javax.swing.JFrame {
         cancelButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Cập nhật sinh viên");
 
         jLabel2.setText("Lớp");
 

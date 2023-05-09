@@ -52,6 +52,7 @@ public class AssignTopicForm extends javax.swing.JFrame {
         studentInfo = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Giao đồ án");
 
         jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 50, 5));
 

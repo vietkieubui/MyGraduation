@@ -37,6 +37,7 @@ public class ConnectSolrView extends javax.swing.JFrame {
         solrUrlText = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Kết nối Apache Solr");
 
         connectButton.setText("Kết nối");
 

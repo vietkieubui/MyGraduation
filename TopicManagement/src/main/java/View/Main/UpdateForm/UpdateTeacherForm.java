@@ -53,6 +53,7 @@ public class UpdateTeacherForm extends javax.swing.JFrame {
         idText = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Cập nhật giảng viên");
 
         jLabel3.setText("Khoa");
 

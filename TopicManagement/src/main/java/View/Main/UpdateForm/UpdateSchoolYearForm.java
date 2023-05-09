@@ -45,6 +45,7 @@ public class UpdateSchoolYearForm extends javax.swing.JFrame {
         idText = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Cập nhật năm học");
 
         jLabel1.setText("Niên khóa");
 

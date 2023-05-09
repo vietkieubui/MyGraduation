@@ -58,6 +58,7 @@ public class AddStudentForm extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Thêm sinh viên");
 
         jLabel2.setText("Lớp");
 

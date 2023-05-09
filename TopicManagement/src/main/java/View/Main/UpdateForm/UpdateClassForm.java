@@ -51,6 +51,7 @@ public class UpdateClassForm extends javax.swing.JFrame {
         idText = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Cập nhật thông tin lớp");
 
         jLabel2.setText("Tên lớp");
 

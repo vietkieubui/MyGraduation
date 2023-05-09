@@ -38,6 +38,7 @@ public class AddProjectTopicFormStep3 extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         backButton = new javax.swing.JButton();
         finishButton = new javax.swing.JButton();
+        checkSimilar = new javax.swing.JButton();
         id = new javax.swing.JTextField();
         course = new javax.swing.JTextField();
         majors = new javax.swing.JTextField();
@@ -80,6 +81,9 @@ public class AddProjectTopicFormStep3 extends javax.swing.JPanel {
 
         finishButton.setText("Hoàn thành");
         jPanel2.add(finishButton);
+
+        checkSimilar.setText("Kiểm tra trùng lặp");
+        jPanel2.add(checkSimilar);
 
         id.setEditable(false);
 
@@ -195,6 +199,7 @@ public class AddProjectTopicFormStep3 extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton backButton;
+    public javax.swing.JButton checkSimilar;
     public javax.swing.JTextField course;
     public javax.swing.JTextArea description;
     public javax.swing.JButton finishButton;

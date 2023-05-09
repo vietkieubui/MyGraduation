@@ -40,7 +40,7 @@ public class SubmitDocumentForm extends javax.swing.JFrame {
         checkSimilarButton = new javax.swing.JButton();
         viewReport = new javax.swing.JButton();
         submitDocumentButton = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        deleteCurrentDocument = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         documentId = new javax.swing.JTextField();
@@ -55,6 +55,7 @@ public class SubmitDocumentForm extends javax.swing.JFrame {
         fileNameLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Quản lí tài liệu");
 
         jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 50, 5));
 
@@ -67,8 +68,8 @@ public class SubmitDocumentForm extends javax.swing.JFrame {
         submitDocumentButton.setText("Nộp tài liệu");
         jPanel1.add(submitDocumentButton);
 
-        jButton1.setText("Xóa tài liệu hiện tại");
-        jPanel1.add(jButton1);
+        deleteCurrentDocument.setText("Xóa tài liệu hiện tại");
+        jPanel1.add(deleteCurrentDocument);
 
         cancelButton.setText("Hủy");
         jPanel1.add(cancelButton);
@@ -255,10 +256,10 @@ public class SubmitDocumentForm extends javax.swing.JFrame {
     public javax.swing.JButton cancelButton;
     public javax.swing.JButton checkSimilarButton;
     public javax.swing.JButton chooseFileButton;
+    public javax.swing.JButton deleteCurrentDocument;
     public javax.swing.JTextField documentId;
     public javax.swing.JComboBox<String> documentType;
     public javax.swing.JLabel fileNameLabel;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel6;

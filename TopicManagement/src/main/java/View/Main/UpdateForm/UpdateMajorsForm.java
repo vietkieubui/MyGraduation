@@ -53,6 +53,7 @@ public class UpdateMajorsForm extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTextArea1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Cập nhật khoa");
 
         jLabel1.setText("Tên khoa");
 

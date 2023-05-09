@@ -48,6 +48,7 @@ public class AddCourseForm extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Thêm khóa");
 
         jLabel3.setText("Khoa");
 

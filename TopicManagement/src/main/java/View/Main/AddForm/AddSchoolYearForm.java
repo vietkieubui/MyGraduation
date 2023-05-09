@@ -42,6 +42,7 @@ public class AddSchoolYearForm extends javax.swing.JFrame {
         cancelButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Thêm năm học");
 
         jLabel1.setText("Niên khóa");
 
