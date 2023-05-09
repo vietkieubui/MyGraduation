@@ -37,7 +37,6 @@ public class ReportSimilarForm extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         reportTable = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
-        openFileButton = new javax.swing.JButton();
         closeButton = new javax.swing.JButton();
         documentInfo = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -64,9 +63,6 @@ public class ReportSimilarForm extends javax.swing.JFrame {
         jScrollPane1.setViewportView(reportTable);
 
         jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 50, 5));
-
-        openFileButton.setText("Mở file");
-        jPanel1.add(openFileButton);
 
         closeButton.setText("Đóng");
         jPanel1.add(closeButton);
@@ -147,7 +143,6 @@ public class ReportSimilarForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    public javax.swing.JButton openFileButton;
     public javax.swing.JTable reportTable;
     // End of variables declaration//GEN-END:variables
 }

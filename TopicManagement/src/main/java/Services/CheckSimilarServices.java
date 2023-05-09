@@ -61,20 +61,20 @@ public final class CheckSimilarServices {
             String kGram = kGrams.get(i);
             int kGramHash = kGram.hashCode();
 
-            if (!kGramHashes.containsKey(kGram)) {
+            if (!kGramHashes.containsKey(i)) {
                 kGramHashes.put(i, kGramHash);
             }
         }
 
         for (int i = 0; i < kGrams.size(); i++) {
             String kGram = kGrams.get(i);
-            int kGramHash = kGramHashes.get(kGram);
+            int kGramHash = kGramHashes.get(i);
 
             if (isMinima(kGramHash, kGramHashes, i)) {
                 fingerprints.add(kGram);
+                System.out.println(kGramHash);
             }
         }
-
 //        System.out.println(fingerprints);
         return fingerprints;
     }

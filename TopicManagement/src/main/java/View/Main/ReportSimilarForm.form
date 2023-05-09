@@ -120,14 +120,6 @@
         <Property name="horizontalGap" type="int" value="50"/>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JButton" name="openFileButton">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="M&#x1edf; file"/>
-          </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-          </AuxValues>
-        </Component>
         <Component class="javax.swing.JButton" name="closeButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="&#x110;&#xf3;ng"/>

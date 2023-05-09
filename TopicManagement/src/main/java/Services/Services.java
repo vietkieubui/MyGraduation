@@ -1052,7 +1052,7 @@ public final class Services {
         return false;
     }
 
-    public static boolean saveSimilarData(String document1, String document2, double similarPercent) {
+    public static void saveSimilarData(String document1, String document2, double similarPercent) {
         if (checkExistSimilarPercentBetweenTwoDocuments(document1, document2)) {
             String[] columnsName = {"similarPercent"};
             String[] values = {
@@ -1063,8 +1063,19 @@ public final class Services {
                     + "OR (Similar.document1 = " + toSQLString(document2) + "\n"
                     + "AND Similar.document2 = " + toSQLString(document1) + ")";
             updateData("Similar", columnsName, values, condition);
+        } else {
+            String[] columnsName = {
+                "document1",
+                "document2",
+                "similarPercent"
+            };
+            String[] values = {
+                toSQLString(document1),
+                toSQLString(document2),
+                toSQLString(String.valueOf(similarPercent))
+            };
+            insertIntoDatabase("Similar", columnsName, values);
         }
-        return false;
     }
 
     public static boolean deleteDocumentAndSimilar(String documentId) {

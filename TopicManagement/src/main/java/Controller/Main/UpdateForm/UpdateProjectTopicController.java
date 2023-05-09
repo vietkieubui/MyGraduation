@@ -4,6 +4,7 @@
  */
 package Controller.Main.UpdateForm;
 
+import Controller.Main.AddForm.AddProjectTopicController;
 import Model.Auth.User;
 import Model.CourseModel;
 import Model.MajorsModel;
@@ -12,6 +13,8 @@ import Model.SchoolYearModel;
 import Model.StudentModel;
 import Model.TeacherModel;
 import Services.Services;
+import Services.SolrServices;
+import Services.VietnameseAnalyzerServices;
 import View.Main.UpdateForm.UpdateProjectTopicForm;
 import View.Main.UpdateForm.UpdateProjectTopicFormStep1;
 import View.Main.UpdateForm.UpdateProjectTopicFormStep2;
@@ -20,6 +23,7 @@ import View.Main.UpdateForm.UpdateStudentForm;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
@@ -30,6 +34,8 @@ import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+import org.apache.solr.client.solrj.SolrServerException;
+import org.apache.solr.common.SolrInputDocument;
 
 /**
  *
@@ -238,6 +244,24 @@ public class UpdateProjectTopicController {
         Services.addActionListener(step3.finishButton, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                SolrInputDocument document = new SolrInputDocument();
+                String createdAt = Services.getCurrentTime();
+                document.addField("type", "2");
+                document.addField("id", projectTopicModel.id);
+                document.addField("createdAt", createdAt);
+
+                String[] contents;
+                try {
+                    contents = VietnameseAnalyzerServices.textToStrings(projectTopicModel.name);
+                    for (String content : contents) {
+                        document.addField("content", content);
+                    }
+                    SolrServices.indexToSolr(document);
+                } catch (IOException | SolrServerException ex) {
+                    Logger.getLogger(AddProjectTopicController.class.getName()).log(Level.SEVERE, null, ex);
+                    Services.showMess("Có lỗi xảy ra");
+                    return;
+                }
                 String[] columnsName = {
                     "id",
                     "name",

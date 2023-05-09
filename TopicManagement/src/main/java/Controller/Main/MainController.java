@@ -29,6 +29,7 @@ import Model.StudentModel;
 import Model.TeacherModel;
 import Services.MultiLineCellRenderer;
 import Services.Services;
+import Services.SolrServices;
 import View.Main.*;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
@@ -198,6 +199,7 @@ public final class MainController {
                     String projectTopicId = (String) projectTopicTable.getValueAt(deleteRow, 0);
                     switch (Services.showConfirmDialog("Bạn có chắc chắn muốn xóa đề tài có mã: " + projectTopicId)) {
                         case 0:
+                            SolrServices.deleteDocument(projectTopicId);
                             if (Services.deleteData("ProjectTopics", "id=" + Services.toSQLString(projectTopicId))) {
                                 Services.showMess("Xóa thành công");
                                 Services.getNewProjectTopic(projectTopicTable);
