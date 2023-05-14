@@ -18,6 +18,7 @@ import java.nio.charset.StandardCharsets;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.security.*;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -63,11 +64,18 @@ public final class Services {
 
     public static boolean login(String username, String password) {
         String hashedPassword = Services.hashPassword(password);
-        String sql = "SELECT * FROM Users WHERE username = " + toSQLString(username) + " AND password = " + toSQLString(hashedPassword);
+//        String sql = "SELECT * FROM Users WHERE username = " + toSQLString(username) + " AND password = " + toSQLString(hashedPassword);
+        String sql = "SELECT * FROM Users WHERE username = ? AND password = ?";
+
         try {
+            PreparedStatement ps = cnn.prepareStatement(sql);
+            ps.setString(1, username);
+            ps.setString(2, hashedPassword);
             Statement stm = cnn.createStatement();
-            ResultSet rs = stm.executeQuery(sql);
+//            ResultSet rs = stm.executeQuery(sql);
+            ResultSet rs = ps.executeQuery();
             while (rs.next()) {
+                System.out.println(sql);
                 User.setUser(rs.getString("id"), rs.getString(3), rs.getString(2), rs.getString(4));
                 return true;
             }

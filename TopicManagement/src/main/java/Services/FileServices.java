@@ -63,7 +63,7 @@ public final class FileServices {
         String text = null;
         Tika tika = new Tika();
         text = tika.parseToString(file).replaceAll("[^\\p{L}\\p{N} ]", "");
-
         return text;
     }
 }
+

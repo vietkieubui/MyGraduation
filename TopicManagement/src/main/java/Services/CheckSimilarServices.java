@@ -75,7 +75,6 @@ public final class CheckSimilarServices {
                 System.out.println(kGramHash);
             }
         }
-//        System.out.println(fingerprints);
         return fingerprints;
     }
 
